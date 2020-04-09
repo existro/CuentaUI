@@ -1,0 +1,42 @@
+<h3 class="ui grey dividing header">Clientes</h3>
+
+<div class="ui small icon input">
+    <input type="text" placeholder="Search...">
+    <i class="search icon"></i>
+</div>
+<div class="ui small icon basic buttons">
+    <button type="button" class="ui small button" routerLink="../cliente-nuevo">
+        <i class="plus icon"></i>
+    </button>
+</div>
+<br>
+<table class="ui grey small compact striped table">
+    <thead>
+        <tr>
+            <th>Nit</th>
+            <th>Nombre razón social</th>
+            <th>Propietario</th>
+            <th>SAT</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cliente of respClientes">
+            <td>{{cliente.Nit}}</td>
+            <td>{{cliente.Nombre}}</td>
+            <td>{{cliente.Propietario}}</td>
+            <td>{{cliente.SAT}}</td>
+            <td><a routerLink="../cliente-ver"> <i class="large grey search icon" data-content="Ver"
+                        data-variation="mini"></i>
+                </a>
+                <a routerLink="../cliente-editar">
+                    <i class="large grey pencil alternate icon" data-content="Editar" data-variation="mini"></i></a>
+            </td>
+            <td><a routerLink="../cliente-eliminar"><i class="large grey x icon icon" data-content="Eliminar"
+                        data-variation="mini"></i></a></td>
+
+        </tr>
+
+    </tbody>
+</table>

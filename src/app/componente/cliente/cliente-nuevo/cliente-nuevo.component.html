@@ -1,0 +1,44 @@
+<form form [formGroup]="FormCliente" class="ui small form">
+    <h4 class="ui dividing header">Nuevo cliente</h4>
+
+    <div class="fields">
+        <div class="four wide field">
+            <label>Régimen</label>
+            <select class="ui search dropdown" name="Idregimen" formControlName="idRegimen">
+                <option value="">Selecciona...</option>
+                <option *ngFor="let regimen of respRegimen" value="{{regimen.idRegimen}}">{{regimen.Nombre}}
+                </option>
+            </select>
+
+        </div>
+        <div class="four wide field">
+            <label>Nit</label>
+            <input type="text" name="Nit" formControlName="Nit">
+        </div>
+        <div class="eight wide field">
+            <label>Propietario</label>
+            <input type="text" name="Propietario" formControlName="Propietario">
+        </div>
+    </div>
+    <div class="fields">
+        <div class="four wide field">
+            <label>Teléfono</label>
+            <input type="text" name="Telefono" formControlName="Telefono">
+        </div>
+        <div class="four wide field">
+            <label>SAT</label>
+            <input type="text" name="SAT" formControlName="SAT">
+        </div>
+        <div class="eight wide field">
+            <label>Nombre/Razón social</label>
+            <input type="text" name="Nombre" formControlName="Nombre">
+        </div>
+    </div>
+    <div class="fields">
+        <div class="four wide field ">
+            <label>Fecha de inicio</label>
+            <input type="date" id="FechaInicio" name="FechaInicio" formControlName="FechaInicio">
+        </div>
+    </div>
+    <div class="ui tiny button" tabindex="0" (click)="GuardarNuevo()">Aceptar</div>
+</form>

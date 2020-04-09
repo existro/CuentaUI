@@ -24,9 +24,15 @@
               "src/assets"
             ],
             "styles": [
+              "../CuentaUI/node_modules/semantic-ui-css/semantic.min.css",
+              "../CuentaUI/node_modules/semantic-ui-calendar/dist/calendar.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../CuentaUI/node_modules/jquery/dist/jquery.js",
+              "../CuentaUI/node_modules/semantic-ui-css/semantic.min.js",
+              "../CuentaUI/node_modules/semantic-ui-calendar/dist/calendar.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "CuentaUI"
+    }
+  },
+  "defaultProject": "CuentaUI",
+  "cli": {
+    "analytics": false
+  }
 }
