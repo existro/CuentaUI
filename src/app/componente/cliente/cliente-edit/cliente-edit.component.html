@@ -1,0 +1,142 @@
+<form [formGroup]="FormCliente" (ngSubmit)="Guardar()" class="ui small form">
+    <h4 class="ui dividing header">
+        <i class="id badge outline icon"></i>
+        <div class="content">
+            {{respCliente.Nombre}}
+        </div>
+    </h4>
+    <div class="ui top attached secondary menu">
+        <a class="ui icon item msjflotante" routerLink="/cliente/ver" data-content="Atrás" data-variation="mini">
+            <i class="chevron left blue icon"></i>
+        </a>
+        <div class="right menu">
+            <a class="ui icon item msjflotante" (click)="ModalEliminar();" data-content="Eliminar"
+                data-variation="mini">
+                <i class="trash alternate outline blue icon"></i>
+            </a>
+            <a class="ui icon item msjflotante" routerLink="../../cliente/nuevo" data-content="Nuevo"
+                data-variation="mini">
+                <i class="plus blue icon"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ui bottom attached basic segment">
+
+        <div class="fields">
+            <div class="three wide field" [ngClass]="{'error': FCont.Nit.invalid && submit}">
+                <label>Nit</label>
+                <input type="text" name="Nit" formControlName="Nit">
+            </div>
+
+            <div class="five wide field" [ngClass]="{'error': FCont.idRegimen.invalid && submit}">
+                <label>Régimen</label>
+                <select class=" ui search dropdown" name="idRegimen" formControlName="idRegimen">
+                    <option value="0">Seleccione...</option>
+                    <option *ngFor="let regimen of respRegimen" value="{{regimen.idRegimen}}">{{regimen.Nombre}}
+                    </option>
+                </select>
+
+            </div>
+            <div class="eight wide field" [ngClass]="{'error': FCont.Propietario.invalid && submit}">
+                <label>Propietario</label>
+                <input type="text" id="Propietario" name="Propietario" formControlName="Propietario">
+                <div *ngIf="FCont.Propietario.invalid && submit"
+                    class="ui basic red pointing prompt label transition visible">Ingrese un nombre de propietario
+                    válido
+                </div>
+            </div>
+        </div>
+        <div class="fields">
+            <div class="three wide field" [ngClass]="{'error': FCont.Telefono.invalid && submit}">
+                <label>Teléfono</label>
+                <input type="text" name="Telefono" formControlName="Telefono">
+            </div>
+            <div class="three wide field" [ngClass]="{'error': FCont.SAT.invalid && submit}">
+                <label>SAT</label>
+                <input type="text" name="SAT" formControlName="SAT">
+            </div>
+            <div class="ten wide field" [ngClass]="{'error': FCont.Nombre.invalid && submit}">
+                <label>Nombre/Razón social</label>
+                <input type="text" name="Nombre" formControlName="Nombre">
+            </div>
+        </div>
+        <div class="fields">
+
+            <div class="three wide field " [ngClass]="{'error': FCont.FechaInicio.invalid && submit}">
+                <label>Fecha de inicio</label>
+                <input type="date" name="FechaInicio" formControlName="FechaInicio">
+            </div>
+
+            <div class="thirteen wide field">
+                <label>Observaciones</label>
+                <textarea rows="2" type="text" name="Detalles" formControlName="Detalles"></textarea>
+            </div>
+        </div>
+
+        <div class="ui center aligned grid">
+            <div class="center aligned one column row">
+                <div class="column">
+                    <button class="ui tiny green basic button" [disabled]="!FormCliente.valid"
+                        type="submit">Guardar</button>
+
+
+                    <!-- <div class="ui small buttons">
+                        <button class="ui blue basic button" (click)="Guardar('GS')">Guardar/Salir</button>
+                        <div class="or" data-text="o"></div>
+                        <button class="ui green basic button" (click)="Guardar('G')">Guardar</button>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="left aligned  column">
+                    <div class="ui success message" [ngClass]="{'visible': !submit}">
+                        <div class="header">
+                            Guardado
+                        </div>
+                        <p>El cliente se guardo correctamente</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</form>
+<div id="modalEliminarVer" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="trash icon"></i>
+        Eliminar Cliente
+    </div>
+    <div class="content">
+        <p>¿Deseas eliminar el cliente?</p>
+    </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </button>
+        <button class="ui green ok inverted button" (click)="Eliminar()">
+            <i class="checkmark icon"></i>
+            SI
+        </button>
+    </div>
+</div>
+
+<!-- <div id="modalGuardado" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="save icon"></i>
+        Guardado
+    </div>
+    <div class="content">
+        <p>El cliente se guardó correctamente ¿Quieres salir o continuar?</p>
+    </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button" routerLink="../ver">
+            <i class="remove icon"></i>
+            Salir
+        </button>
+        <button class="ui green ok inverted button">
+            <i class="checkmark icon"></i>
+            Continuar
+        </button>
+    </div>
+</div> -->

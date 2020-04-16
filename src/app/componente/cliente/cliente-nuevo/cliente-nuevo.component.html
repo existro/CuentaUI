@@ -1,44 +1,114 @@
-<form form [formGroup]="FormCliente" class="ui small form">
-    <h4 class="ui dividing header">Nuevo cliente</h4>
+<h4 class="ui dividing header">
+    <i class="id badge outline icon"></i>
+    <div class="content">
+        Nuevo Cliente
+    </div>
+</h4>
+<div class="ui top attached secondary menu">
+    <a class="ui icon item msjflotante" routerLink="../../cliente/ver" data-content="Atrás" data-variation="mini">
+        <i class="chevron left blue icon"></i>
+    </a>
 
-    <div class="fields">
-        <div class="four wide field">
-            <label>Régimen</label>
-            <select class="ui search dropdown" name="Idregimen" formControlName="idRegimen">
-                <option value="">Selecciona...</option>
-                <option *ngFor="let regimen of respRegimen" value="{{regimen.idRegimen}}">{{regimen.Nombre}}
-                </option>
-            </select>
+</div>
+<div class="ui bottom attached basic segment">
+    <form form [formGroup]="FormCliente" (ngSubmit)="Guardar()" class="ui small form">
+        <div class="fields">
+
+            <div class="five wide field" [ngClass]="{'error': FCont.Nit.invalid && FormCliente.dirty}">
+                <label>Nit</label>
+                <input type="text" name="Nit" formControlName="Nit">
+            </div>
+
+            <div class="five wide field" [ngClass]="{'error': FCont.idRegimen.invalid && FormCliente.dirty}">
+                <label>Régimen</label>
+                <select class=" ui search dropdown" name="idRegimen" formControlName="idRegimen">
+                    <option value="0">Seleccione...</option>
+                    <option *ngFor="let regimen of respRegimen" value="{{regimen.idRegimen}}">{{regimen.Nombre}}
+                    </option>
+                </select>
+
+            </div>
+
+            <div class="seven wide field" [ngClass]="{'error': FCont.Propietario.invalid && FormCliente.dirty}">
+                <label>Propietario</label>
+                <input type="text" id="Propietario" name="Propietario" formControlName="Propietario">
+                <!-- <div *ngIf="FCont.Propietario.invalid && submit"
+                    class="ui basic red pointing prompt label transition visible">Ingrese un nombre de propietario
+                    válido
+                </div> -->
+            </div>
 
         </div>
-        <div class="four wide field">
-            <label>Nit</label>
-            <input type="text" name="Nit" formControlName="Nit">
+        <div class="fields">
+            <div class="four wide field" [ngClass]="{'error': FCont.Telefono.invalid && FormCliente.dirty}">
+                <label>Teléfono</label>
+                <input type="text" name="Telefono" formControlName="Telefono">
+            </div>
+            <div class="four wide field" [ngClass]="{'error': FCont.SAT.invalid && FormCliente.dirty}">
+                <label>SAT</label>
+                <input type="text" name="SAT" formControlName="SAT">
+            </div>
+            <div class="eight wide field" [ngClass]="{'error': FCont.Nombre.invalid && FormCliente.dirty}">
+                <label>Nombre/Razón social</label>
+                <input type="text" name="Nombre" formControlName="Nombre">
+            </div>
         </div>
-        <div class="eight wide field">
-            <label>Propietario</label>
-            <input type="text" name="Propietario" formControlName="Propietario">
+
+        <div class="fields">
+
+            <div class="three wide field" name="FechaInicio"
+                [ngClass]="{'error': FCont.FechaInicio.invalid && FormCliente.dirty}">
+                <label>Fecha de inicio</label>
+                <input type="date" name="FechaInicio" formControlName="FechaInicio">
+            </div>
+
+            <div class="twelve wide field">
+                <label>Observaciones</label>
+                <textarea rows="2" type="text" name="Detalles" formControlName="Detalles"></textarea>
+            </div>
         </div>
+
+
+        <div class="ui center aligned grid">
+            <div class="center aligned one column row">
+                <div class="column">
+                    <button class="ui tiny secondary inverted  button" [disabled]="disableButton"
+                        type="FormCliente.dirty" [disabled]="!FormCliente.valid">Guardar</button>
+                </div>
+            </div>
+
+            <!--  <div class="row">
+                <div class="left aligned six wide column">
+                    <div class="ui success message" [ngClass]="{'visible': guardado}">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Guardado
+                        </div>
+                        <p>El cliente se guardo correctamente</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </form>
+</div>
+
+<!--
+< div id="modalGuardado" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="save icon"></i>
+        Guardado
     </div>
-    <div class="fields">
-        <div class="four wide field">
-            <label>Teléfono</label>
-            <input type="text" name="Telefono" formControlName="Telefono">
-        </div>
-        <div class="four wide field">
-            <label>SAT</label>
-            <input type="text" name="SAT" formControlName="SAT">
-        </div>
-        <div class="eight wide field">
-            <label>Nombre/Razón social</label>
-            <input type="text" name="Nombre" formControlName="Nombre">
-        </div>
+    <div class="content">
+        <p>El cliente se guardó correctamente ¿Quieres salir o continuar?</p>
     </div>
-    <div class="fields">
-        <div class="four wide field ">
-            <label>Fecha de inicio</label>
-            <input type="date" id="FechaInicio" name="FechaInicio" formControlName="FechaInicio">
-        </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button" routerLink="../ver">
+            <i class="remove icon"></i>
+            Salir
+        </button>
+        <button class="ui green ok inverted button">
+            <i class="checkmark icon"></i>
+            Continuar
+        </button>
     </div>
-    <div class="ui tiny button" tabindex="0" (click)="GuardarNuevo()">Aceptar</div>
-</form>
+</div> -->

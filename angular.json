@@ -26,7 +26,8 @@
             "styles": [
               "../CuentaUI/node_modules/semantic-ui-css/semantic.min.css",
               "../CuentaUI/node_modules/semantic-ui-calendar/dist/calendar.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "../CuentaUI/node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "../CuentaUI/node_modules/jquery/dist/jquery.js",

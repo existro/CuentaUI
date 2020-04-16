@@ -13,7 +13,7 @@ export class AppComponent {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
     $('.ui.sidebar').sidebar({
-      closable: false,
+      /* closable: false, */
       dimPage: false,
       context: $('.bottom.segment')
     });

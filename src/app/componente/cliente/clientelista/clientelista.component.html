@@ -1,42 +1,68 @@
-<h3 class="ui grey dividing header">Clientes</h3>
+<h4 class="ui dividing header">
+    <i class="id card outline icon"></i>
+    <div class="content">
+        Clientes
+    </div>
+</h4>
 
-<div class="ui small icon input">
-    <input type="text" placeholder="Search...">
-    <i class="search icon"></i>
+<div class="ui top attached secondary menu">
+
+    <div class="ui  aligned category search item">
+        <div class="ui transparent icon input">
+            <input class="prompt" type="text" placeholder="Buscar..." [(ngModel)]="buscarCliente">
+            <i class="search link icon"></i>
+        </div>
+        <div class="results"></div>
+    </div>
+    <div class="right menu">
+        <a class="ui  icon item msjflotante" routerLink="../cliente/nuevo" data-content="Agregar" data-variation="mini">
+            <i class="plus blue icon"></i>
+        </a>
+    </div>
+
+
 </div>
-<div class="ui small icon basic buttons">
-    <button type="button" class="ui small button" routerLink="../cliente-nuevo">
-        <i class="plus icon"></i>
-    </button>
-</div>
-<br>
-<table class="ui grey small compact striped table">
-    <thead>
-        <tr>
-            <th>Nit</th>
-            <th>Nombre razón social</th>
-            <th>Propietario</th>
-            <th>SAT</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let cliente of respClientes">
-            <td>{{cliente.Nit}}</td>
-            <td>{{cliente.Nombre}}</td>
-            <td>{{cliente.Propietario}}</td>
-            <td>{{cliente.SAT}}</td>
-            <td><a routerLink="../cliente-ver"> <i class="large grey search icon" data-content="Ver"
+<div class="ui bottom attached basic segment">
+
+    <table class="ui grey small very basic table">
+        <thead>
+            <tr>
+                <th>Nit</th>
+                <th>Nombre razón social</th>
+                <th>Propietario</th>
+                <th>SAT</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let cliente of respClientes | filter:[{field:'Nombre', value: buscarCliente},{field:'Nit', value: buscarCliente},{field:'Propietario', value: buscarCliente},{field:'SAT', value: buscarCliente}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }">
+                <td><a routerLink="../cliente/ver" (click)="Seleccionado(cliente.idCliente)">{{cliente.Nit}}</a></td>
+                <td>{{cliente.Nombre}}</td>
+                <td>{{cliente.Propietario}}</td>
+                <td>{{cliente.SAT}}</td>
+                <!--  <td>
+                    <a routerLink="../Cliente-Ver"> <i class="large grey search icon" data-content="Ver"
                         data-variation="mini"></i>
-                </a>
-                <a routerLink="../cliente-editar">
-                    <i class="large grey pencil alternate icon" data-content="Editar" data-variation="mini"></i></a>
-            </td>
-            <td><a routerLink="../cliente-eliminar"><i class="large grey x icon icon" data-content="Eliminar"
-                        data-variation="mini"></i></a></td>
+                </a> 
+                    <a routerLink="../cliente/edit" (click)="Seleccionado(cliente.idCliente)" class="msjflotante">
+                        <i class="large grey pencil alternate icon " data-content="Editar"
+                            data-variation="mini"></i></a>
+                </td> -->
 
-        </tr>
+            </tr>
 
-    </tbody>
-</table>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="6">
+                    <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
+                        nextLabel="Siguiente" maxSize="9" class="ui right floated">
+                    </pagination-controls>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

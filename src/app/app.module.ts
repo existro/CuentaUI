@@ -11,6 +11,14 @@ import { MenuComponent } from './componente/menu/menu.component';
 import { CatalogoService } from './servicio/catalogo.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PipesModule } from 'w-ng5';
+import { FormsModule } from '@angular/forms';
+import { ClienteEditComponent } from './componente/cliente/cliente-edit/cliente-edit.component';
+import { ClienteVerComponent } from './componente/cliente/cliente-ver/cliente-ver.component';
+import { DatePipe } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -20,16 +28,29 @@ import { ReactiveFormsModule } from '@angular/forms';
     InicioComponent,
     ClienteNuevoComponent,
     ClientelistaComponent,
-    MenuComponent
+    MenuComponent,
+    ClienteEditComponent,
+    ClienteVerComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    PipesModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true
+    }) // ToastrModule added
 
   ],
-  providers: [CatalogoService],
+  providers: [CatalogoService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

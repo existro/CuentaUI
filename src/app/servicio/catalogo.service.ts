@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CatalogoService {
-  API_URI = 'http://www.existro.shekalug.org/CuentApi/';
+  API_URI = 'http://www.existro.shekalug.org/cuentapi';
   constructor(private http: HttpClient) { }
 
 
@@ -22,6 +22,6 @@ export class CatalogoService {
   }
 
   Editar(cNombre: string, cliente: any, id: string) {
-    return this.http.post(`${this.API_URI}/${cNombre}/${id}`, cliente);
+    return this.http.post(`${this.API_URI}/${cNombre}/1`, cliente);
   }
 }

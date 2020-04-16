@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~9.1.0",
+    "@angular/animations": "^9.1.1",
     "@angular/common": "~9.1.0",
     "@angular/compiler": "~9.1.0",
     "@angular/core": "~9.1.0",
@@ -20,10 +20,13 @@
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
     "jquery": "^3.4.1",
+    "ngx-pagination": "^5.0.0",
+    "ngx-toastr": "^12.0.1",
     "rxjs": "~6.5.4",
     "semantic-ui-calendar": "0.0.8",
     "semantic-ui-css": "^2.4.1",
     "tslib": "^1.10.0",
+    "w-ng5": "^1.1.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

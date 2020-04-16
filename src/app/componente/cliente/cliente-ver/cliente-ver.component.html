@@ -1,0 +1,55 @@
+<h4 class="ui dividing header">
+    <i class="id badge outline icon"></i>
+    <div class="content">
+        {{respCliente.Nombre}}
+    </div>
+</h4>
+<div class="ui top attached secondary menu">
+    <a class="ui icon item msjflotante" routerLink="../" data-content="Atrás" data-variation="mini">
+        <i class="chevron left blue icon"></i>
+    </a>
+    <div class="right menu">
+
+        <a class="ui icon item msjflotante" routerLink="../../cliente/edit" data-content="Editar" data-variation="mini">
+            <i class="edit outline blue icon"></i>
+        </a>
+        <a class="ui icon item msjflotante" routerLink="../../cliente/nuevo" data-content="Nuevo" data-variation="mini">
+            <i class="plus blue icon"></i>
+        </a>
+    </div>
+</div>
+<div class="ui bottom attached basic segment">
+    <table class="ui definition table">
+
+        <tbody>
+            <tr>
+                <td class="three wide column">Nit</td>
+                <td>{{respCliente.Nit}}</td>
+            </tr>
+            <tr>
+                <td>Propietario</td>
+                <td>{{respCliente.Propietario}}</td>
+            </tr>
+            <tr>
+                <td>Nombre/Razón social</td>
+                <td>{{respCliente.Nombre}}</td>
+            </tr>
+            <tr>
+                <td>Régimen</td>
+                <td>{{respRegimen.Nombre}}</td>
+            </tr>
+            <tr>
+                <td>SAT</td>
+                <td>{{respCliente.SAT}}</td>
+            </tr>
+            <tr>
+                <td>Fecha de inicio</td>
+                <td>{{respCliente.FechaInicio | date: 'dd/MM/yyyy'}}</td>
+            </tr>
+            <tr>
+                <td>Observaciones</td>
+                <td>{{respCliente.Detalles}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
