@@ -15,9 +15,16 @@
         <div class="results"></div>
     </div>
     <div class="right menu">
-        <a class="ui  icon item msjflotante" routerLink="../cliente/nuevo" data-content="Agregar" data-variation="mini">
+
+        <div class="ui item toggle checkbox">
+            <input type="checkbox" (click)="VerTodos()" name="Estado" [(ngModel)]="chkEstado">
+            <label>Inactivos</label>
+        </div>
+
+        <a class="ui  icon item msjflotante" routerLink="/cliente-nuevo" data-content="Agregar" data-variation="mini">
             <i class="plus blue icon"></i>
         </a>
+
     </div>
 
 
@@ -31,14 +38,12 @@
                 <th>Nombre razón social</th>
                 <th>Propietario</th>
                 <th>SAT</th>
-                <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr
-                *ngFor="let cliente of respClientes | filter:[{field:'Nombre', value: buscarCliente},{field:'Nit', value: buscarCliente},{field:'Propietario', value: buscarCliente},{field:'SAT', value: buscarCliente}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }">
-                <td><a routerLink="../cliente/ver" (click)="Seleccionado(cliente.idCliente)">{{cliente.Nit}}</a></td>
+            <tr *ngFor="let cliente of respClientes | filter:[{field:'Nombre', value: buscarCliente},{field:'Nit', value: buscarCliente},{field:'Propietario', value: buscarCliente},{field:'SAT', value: buscarCliente}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }"
+                [ngClass]="{'negative': cliente.Estado!='A'}">
+                <td><a routerLink="/cliente-ver" (click)="Seleccionado(cliente.idCliente)">{{cliente.Nit}}</a></td>
                 <td>{{cliente.Nombre}}</td>
                 <td>{{cliente.Propietario}}</td>
                 <td>{{cliente.SAT}}</td>
@@ -52,12 +57,10 @@
                 </td> -->
 
             </tr>
-
-
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="6">
+                <th colspan="4">
                     <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
                         nextLabel="Siguiente" maxSize="9" class="ui right floated">
                     </pagination-controls>

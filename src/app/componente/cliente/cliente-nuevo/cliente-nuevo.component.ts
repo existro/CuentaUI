@@ -10,7 +10,7 @@ declare var $: any;
   styleUrls: ['./cliente-nuevo.component.css']
 })
 export class ClienteNuevoComponent implements OnInit {
-
+  nombreEntidad = 'cliente';
   disableButton = false;
   respRegimen: any = [];
   respGuardar: any;
@@ -38,54 +38,62 @@ export class ClienteNuevoComponent implements OnInit {
   ngAfterContentInit(): void {
     $('.ui.dropdown')
       .dropdown();
-
-    /* $('.message')
-      // tslint:disable-next-line: space-before-function-paren
-      .on('click', function () {
-        $(this)
-          .closest('.message')
-          .transition('fade')
-          ;
-      })
-      ; */
-
   }
 
   ngOnInit(): void {
-    this.servicio.ObtenerTodos('regimen').subscribe(
-      res => { this.respRegimen = res; },
-      err => console.error(err)
-    );
+    this.CargarDatos();
   }
 
-  Guardar() {
-    this.disableButton = true;
-    this.submit = true;
-    console.log(this.FormCliente);
-    if (this.FormCliente.valid) {
-      this.servicio.Guardar('cliente', this.FormCliente.value).subscribe(
-        res => {
-          console.log(res);
-          if (res["idGuardado"] > 0) {
-            sessionStorage["idCliente"] = res["idGuardado"];
-            this.FormCliente.reset();
-            this.submit = false;
-            this.mensaje.success('El cliente se guardó correctamente', 'Guardado');
-            /* $('#modalGuardado')
-              .modal('show')
-              ; */
-          }
-        },
-        err => console.error(JSON.stringify(err))
-      );
-    } else {
-      this.mensaje.info('Ingrese todos los campos correctamente', 'Información');
+  async Guardar() {
+    try {
+      this.disableButton = true;
+      this.submit = true;
+      console.log(this.FormCliente);
+      if (this.FormCliente.valid) {
+        const res = await this.servicio.Guardar(this.nombreEntidad, this.FormCliente.value);
+        if (res['idGuardado'] > 0) {
+          sessionStorage["idCliente"] = res["idGuardado"];
+          this.FormCliente.reset();
+          this.submit = false;
+          this.mensaje.success('El cliente se guardó correctamente', 'Guardado');
+        }
+      } else {
+        this.mensaje.info('Ingrese todos los campos correctamente', 'Información');
+      }
+      /*       if (this.FormCliente.valid) {
+              this.servicio.Guardar(this.nombreEntidad, this.FormCliente.value).subscribe(
+                res => {
+                  console.log(res);
+                  if (res["idGuardado"] > 0) {
+                    sessionStorage["idCliente"] = res["idGuardado"];
+                    this.FormCliente.reset();
+                    this.submit = false;
+                    this.mensaje.success('El cliente se guardó correctamente', 'Guardado');
+                  }
+                },
+                err => console.error(JSON.stringify(err))
+              );
+            } else {
+              this.mensaje.info('Ingrese todos los campos correctamente', 'Información');
+            } */
+    } catch (error) {
+
     }
+
 
   }
 
   FechaCambio(val: any) {
     console.log(val);
+  }
+
+  async CargarDatos() {
+    try {
+      this.respRegimen = await this.servicio.ObtenerTodos('regimen');
+    } catch (error) {
+      this.mensaje.error(error, 'Error');
+    }
+
   }
 
 

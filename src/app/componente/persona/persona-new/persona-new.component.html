@@ -1,0 +1,53 @@
+<form [formGroup]="FormPersona" (ngSubmit)="Guardar()" class="ui small form">
+    <h4 class="ui dividing header">
+        <i class="id badge outline icon"></i>
+        <div class="content">
+            Nuevo
+        </div>
+    </h4>
+    <div class="ui top attached secondary menu">
+        <a class="ui icon item msjflotante" routerLink="/persona" data-content="Atrás"
+            data-variation="mini">
+            <i class="chevron left blue icon"></i>
+        </a>
+
+    </div>
+    <div class="ui bottom attached basic segment">
+        <div class="ui small rounded  left floated image">
+            <img src="https://semantic-ui.com/images/wireframe/square-image.png">
+        </div>
+        <div class="fields">
+            <div class="three wide field" [ngClass]="{'error': FCont.Nit.invalid && submit}">
+                <label>Nit</label>
+                <input type="text" name="Nit" formControlName="Nit">
+            </div>
+            <div class="eight wide field" [ngClass]="{'error': FCont.Nombres.invalid && submit}">
+                <label>Nombres</label>
+                <input type="text" name="Nombres" formControlName="Nombres">
+            </div>
+            <div class="eight wide field" [ngClass]="{'error': FCont.Apellidos.invalid && submit}">
+                <label>Apellidos</label>
+                <input type="text" id="Apellidos" name="Apellidos" formControlName="Apellidos">
+            </div>
+        </div>
+
+        <div class="fields">
+
+            <div class="six wide field" [ngClass]="{'error': FCont.Telefono.invalid && submit}">
+                <label>Teléfono</label>
+                <input type="text" name="Telefono" formControlName="Telefono">
+            </div>
+            <div class="six wide field" [ngClass]="{'error': FCont.CorreoE.invalid && submit}">
+                <label>Corrreo electrónico</label>
+                <input type="text" name="CorreoE" formControlName="CorreoE">
+            </div>
+        </div>
+        <div class="ui center aligned grid">
+            <div class="center aligned one column row">
+                <div class="column">
+                    <button class="ui tiny green basic button" type="submit">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

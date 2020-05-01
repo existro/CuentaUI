@@ -1,0 +1,8 @@
+{
+    "/cuentapi/*": {
+        "target": "http://www.existro.shekalug.org",
+        "secure": true,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

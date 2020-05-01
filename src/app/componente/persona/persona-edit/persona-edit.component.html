@@ -1,0 +1,103 @@
+<form [formGroup]="FormPersona" (ngSubmit)="Guardar()" class="ui small form">
+    <h4 class="ui dividing header">
+        <i class="id badge outline icon"></i>
+        <div class="content">
+            {{persona.Nit}}
+        </div>
+    </h4>
+    <div class="ui top attached secondary menu">
+        <a class="ui icon item msjflotante" routerLink="#" (click)="Seleccionar(id)" data-content="Atrás" data-variation="mini">
+            <i class="chevron left blue icon"></i>
+        </a>
+        <div class="right menu">
+            <a class="ui icon item msjflotante" (click)="ModalActivar()" data-content="Activar" data-variation="mini"
+                [ngClass]="{'reveal': !(persona.Estado!='A')}">
+                <i class="sync blue icon"></i>
+            </a>
+            <a class="ui icon item msjflotante" (click)="ModalEliminar();" data-content="Eliminar" data-variation="mini"
+                [ngClass]="{'reveal': persona.Estado!='A'}">
+                <i class="trash alternate outline blue icon"></i>
+            </a>
+
+            <a class="ui icon item msjflotante" routerLink="/persona-new" data-content="Nuevo" data-variation="mini">
+                <i class="plus blue icon"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ui bottom attached basic segment">
+        <div class="ui small rounded  left floated image">
+            <img src="https://semantic-ui.com/images/wireframe/square-image.png">
+        </div>
+        <div class="fields">
+            <div class="three wide field" [ngClass]="{'error': FCont.Nit.invalid && submit}">
+                <label>Nit</label>
+                <input type="text" name="Nit" formControlName="Nit">
+            </div>
+            <div class="eight wide field" [ngClass]="{'error': FCont.Nombres.invalid && submit}">
+                <label>Nombres</label>
+                <input type="text" name="Nombres" formControlName="Nombres">
+            </div>
+            <div class="eight wide field" [ngClass]="{'error': FCont.Apellidos.invalid && submit}">
+                <label>Apellidos</label>
+                <input type="text" id="Apellidos" name="Apellidos" formControlName="Apellidos">
+            </div>
+        </div>
+
+        <div class="fields">
+
+            <div class="six wide field" [ngClass]="{'error': FCont.Telefono.invalid && submit}">
+                <label>Teléfono</label>
+                <input type="text" name="Telefono" formControlName="Telefono">
+            </div>
+            <div class="six wide field" [ngClass]="{'error': FCont.CorreoE.invalid && submit}">
+                <label>Corrreo electrónico</label>
+                <input type="text" name="CorreoE" formControlName="CorreoE">
+            </div>
+        </div>
+        <div class="ui center aligned grid">
+            <div class="center aligned one column row">
+                <div class="column">
+                    <button class="ui tiny green basic button" type="submit">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="modalEliminarVer" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="trash icon"></i>
+        Eliminar persona
+    </div>
+    <div class="content">
+        <p>¿Deseas eliminar la persona?</p>
+    </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </button>
+        <button class="ui green ok inverted button" (click)="Eliminar()">
+            <i class="checkmark icon"></i>
+            SI
+        </button>
+    </div>
+</div>
+<div id="modalActivar" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="sync icon"></i>
+        Activar persona
+    </div>
+    <div class="content">
+        <p>¿Deseas activar la persona?</p>
+    </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </button>
+        <button class="ui green ok inverted button" (click)="Activar()">
+            <i class="checkmark icon"></i>
+            SI
+        </button>
+    </div>
+</div>

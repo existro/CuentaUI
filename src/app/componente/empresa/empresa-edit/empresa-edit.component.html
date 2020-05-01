@@ -1,0 +1,106 @@
+<form [formGroup]="FormEmpresa" (ngSubmit)="Guardar()" class="ui small form">
+    <h4 class="ui dividing header">
+        <i class="id badge outline icon"></i>
+        <div class="content">
+            Nueva - Empresa
+        </div>
+    </h4>
+    <div class="ui top attached secondary menu">
+        <a class="ui icon item msjflotante" routerLink="#" (click)="Seleccionar(id)" data-content="Atrás" data-variation="mini">
+            <i class="chevron left blue icon"></i>
+        </a>
+
+    </div>
+    <div class="ui bottom attached basic segment">
+        <div class="fields">
+
+            <div class="six wide field" [ngClass]="{'error': FCont.Nombre.invalid && submit}">
+                <label>Nombre</label>
+                <input type="text" name="Nombre" formControlName="Nombre">
+            </div>
+
+            <div class="six wide field" [ngClass]="{'error': FCont.idPersona.invalid && submit}">
+                <label>Propietario</label>
+                <select class=" ui search dropdown" name="idPersona" formControlName="idPersona">
+                    <option value="0">Seleccione...</option>
+                    <option *ngFor="let persona of personas" value="{{persona.idPersona}}">{{persona.Nombres}}
+                        {{persona.Apellidos}}
+                    </option>
+                </select>
+            </div>
+            <div class="four wide field" [ngClass]="{'error': FCont.SAT.invalid && submit}">
+                <label>SAT</label>
+                <input type="text" name="SAT" formControlName="SAT">
+            </div>
+
+        </div>
+
+        <div class="fields">
+
+            <div class="three wide field" name="FechaInicio"
+                [ngClass]="{'error': FCont.FechaInicio.invalid && FormEmpresa.dirty}">
+                <label>Fecha de inicio</label>
+                <input type="date" name="FechaInicio" formControlName="FechaInicio">
+            </div>
+
+            <div class="five wide field" [ngClass]="{'error': FCont.idRegimen.invalid && submit}">
+                <label>Régimen</label>
+                <select class=" ui search dropdown" name="idRegimen" formControlName="idRegimen">
+                    <option value="0">Seleccione...</option>
+                    <option *ngFor="let regimen of regimens" value="{{regimen.idRegimen}}">{{regimen.Nombre}}
+                    </option>
+                </select>
+
+            </div>
+            <div class="eight wide field">
+                <label>Detalles</label>
+                <textarea rows="2" type="text" name="Detalles" formControlName="Detalles"></textarea>
+            </div>
+        </div>
+        <div class="ui center aligned grid">
+            <div class="center aligned one column row">
+                <div class="column">
+                    <button class="ui tiny green basic button" type="submit">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="modalEliminarVer" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="trash icon"></i>
+        Eliminar empresa
+    </div>
+    <div class="content">
+        <p>¿Deseas eliminar la empresa?</p>
+    </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </button>
+        <button class="ui green ok inverted button" (click)="Eliminar()">
+            <i class="checkmark icon"></i>
+            SI
+        </button>
+    </div>
+</div>
+<div id="modalActivar" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="sync icon"></i>
+        Activar empresa
+    </div>
+    <div class="content">
+        <p>¿Deseas activar la empresa?</p>
+    </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </button>
+        <button class="ui green ok inverted button" (click)="Activar()">
+            <i class="checkmark icon"></i>
+            SI
+        </button>
+    </div>
+</div>

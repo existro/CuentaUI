@@ -5,20 +5,42 @@ import { ClientelistaComponent } from './componente/cliente/clientelista/cliente
 import { ClienteNuevoComponent } from './componente/cliente/cliente-nuevo/cliente-nuevo.component';
 import { ClienteEditComponent } from './componente/cliente/cliente-edit/cliente-edit.component';
 import { ClienteVerComponent } from './componente/cliente/cliente-ver/cliente-ver.component';
+import { PersonaLstComponent } from './componente/persona/persona-lst/persona-lst.component';
+import { PersonaViewComponent } from './componente/persona/persona-view/persona-view.component';
+import { PersonaNewComponent } from './componente/persona/persona-new/persona-new.component';
+import { PersonaEditComponent } from './componente/persona/persona-edit/persona-edit.component';
+import { EmpresaLstComponent } from './componente/empresa/empresa-lst/empresa-lst.component';
+import { EmpresaViewComponent } from './componente/empresa/empresa-view/empresa-view.component';
+import { EmpresaNewComponent } from './componente/empresa/empresa-new/empresa-new.component';
+import { EmpresaEditComponent } from './componente/empresa/empresa-edit/empresa-edit.component';
+import { FacturaLstComponent } from './componente/factura/factura-lst/factura-lst.component';
+import { FacturaNewComponent } from './componente/factura/factura-new/factura-new.component';
 
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: 'cliente', component: ClientelistaComponent },
-  { path: 'cliente/nuevo', component: ClienteNuevoComponent },
-  { path: 'cliente/edit', component: ClienteEditComponent },
-  { path: 'cliente/ver', component: ClienteVerComponent },
-  { path: '', component: InicioComponent, pathMatch: 'full' },
+  { path: 'cliente-nuevo', component: ClienteNuevoComponent },
+  { path: 'cliente-editar', component: ClienteEditComponent },
+  { path: 'cliente-ver', component: ClienteVerComponent },
+  { path: 'persona', component: PersonaLstComponent },
+  { path: 'persona/:id', component: PersonaViewComponent },
+  { path: 'persona-new', component: PersonaNewComponent },
+  { path: 'persona-edit/:id', component: PersonaEditComponent },
+  { path: 'empresa', component: EmpresaLstComponent },
+  { path: 'empresa/:id', component: EmpresaViewComponent },
+  { path: 'empresa-new', component: EmpresaNewComponent },
+  { path: 'empresa-new/:idPersona', component: EmpresaNewComponent },
+  { path: 'empresa-edit/:id', component: EmpresaEditComponent },
+  { path: 'factura', component: FacturaLstComponent },
+  { path: 'factura-new', component: FacturaNewComponent},
+
+  { path: '', component: InicioComponent },
   { path: '**', component: InicioComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', enableTracing: false })],
+  imports: [RouterModule.forRoot(routes, { /* onSameUrlNavigation: 'reload', */ useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

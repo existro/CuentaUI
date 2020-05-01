@@ -1,0 +1,130 @@
+<form [formGroup]="FormFactura" (ngSubmit)="Guardar()" class="ui mini form">
+    <h4 class="ui dividing header">
+        <i class="id badge outline icon"></i>
+        <div class="content">
+            Nueva - Factura
+        </div>
+    </h4>
+    <div class="ui top attached secondary menu">
+        <a class="ui icon item msjflotante" routerLink="/factura" data-content="Atrás" data-variation="mini">
+            <i class="chevron left blue icon"></i>
+        </a>
+
+    </div>
+    <div class="ui bottom attached basic segment">
+
+        <div class="fields">
+
+            <div class="nine wide field" [ngClass]="{'error': FCont.idEmpresa.invalid && submit}"
+                (change)="selectempresa($event.target.value)">
+                <label>Empresa</label>
+                <select class=" ui search dropdown" name="idEmpresa" formControlName="idEmpresa">
+                    <option value="0">Seleccione...</option>
+                    <option *ngFor="let empresa of empresas" value="{{empresa.idEmpresa}}">{{empresa.Nombre}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="inline fields">
+                <label>¿Tipo de factura?</label>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="frequency" checked="checked">
+                        <label>Compras</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="frequency">
+                        <label>Ventas</label>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="fields">
+            <div class="three wide field" name="Fecha" [ngClass]="{'error': FCont.Fecha.invalid && FormFactura.dirty}">
+                <label>Fecha</label>
+                <input type="date" name="Fecha" formControlName="Fecha">
+            </div>
+            <div class="three wide field" [ngClass]="{'error': FCont.NumeroDoc.invalid && submit}">
+                <label>Número</label>
+                <input type="text" name="NumeroDoc" formControlName="NumeroDoc">
+            </div>
+            <div class="eight wide field" [ngClass]="{'error': FCont.idCuenta.invalid && submit}">
+                <label>Cuenta</label>
+                <select class=" ui search dropdown" name="idCuenta" formControlName="idCuenta">
+                    <option value="0">Seleccione...</option>
+                    <option *ngFor="let cuenta of cuentas" value="{{cuenta.idCuenta}}">{{cuenta.Descripcion}}
+                        {{cuenta.Apellidos}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="fields">
+            <div class="three wide field">
+                <label>Serie</label>
+                <input rows="2" type="text" name="Serie" formControlName="Serie">
+            </div>
+            <div class="three wide field" [ngClass]="{'error': FCont.NitClienteFactura.invalid && submit}">
+                <label>Nit</label>
+                <input type="text" name="NitClienteFactura" formControlName="NitClienteFactura">
+            </div>
+
+            <div class="eight wide field" [ngClass]="{'error': FCont.NombreClienteFactura.invalid && submit}">
+                <label>Nombre cliente</label>
+                <input type="text" name="NombreClienteFactura" formControlName="NombreClienteFactura">
+            </div>
+            <div class="two wide field" [ngClass]="{'error': FCont.Total.invalid && submit}">
+                <label>Total</label>
+                <input type="text" name="Total" formControlName="Total">
+            </div>
+
+        </div>
+        <div class="ui center aligned grid">
+            <div class="center aligned one column row">
+                <div class="column">
+                    <button class="ui green basic button" type="submit">Guardar</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="ui bottom attached basic segment">
+            <table class="ui grey small very basic table">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Nit</th>
+                        <th>Nombre</th>
+                        <th>Serie</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let factura of facturas" [ngClass]="{'negative': factura.Estado!='A'}">
+                        <td>{{factura.NumeroDoc}}</td>
+                        <td>{{factura.NitClienteFactura}}</td>
+                        <td>{{factura.NombreClienteFactura}}</td>
+                        <td>{{factura.Serie}}</td>
+                        <td>{{factura.Fecha|date:"dd/MM/yyy"}}</td>
+                        <th>{{factura.Total}}</th>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <!-- <tr>
+                    <th colspan="5">
+                        <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
+                            nextLabel="Siguiente" maxSize="9" class="ui right floated">
+                        </pagination-controls>
+                    </th>
+                </tr> -->
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</form>

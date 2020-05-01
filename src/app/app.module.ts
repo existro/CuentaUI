@@ -9,7 +9,7 @@ import { ClienteNuevoComponent } from './componente/cliente/cliente-nuevo/client
 import { ClientelistaComponent } from './componente/cliente/clientelista/clientelista.component';
 import { MenuComponent } from './componente/menu/menu.component';
 import { CatalogoService } from './servicio/catalogo.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from 'w-ng5';
@@ -19,7 +19,17 @@ import { ClienteVerComponent } from './componente/cliente/cliente-ver/cliente-ve
 import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpinterceptorService } from './servicio/httpinterceptor.service';
+import { PersonaLstComponent } from './componente/persona/persona-lst/persona-lst.component';
+import { PersonaViewComponent } from './componente/persona/persona-view/persona-view.component';
+import { PersonaNewComponent } from './componente/persona/persona-new/persona-new.component';
+import { PersonaEditComponent } from './componente/persona/persona-edit/persona-edit.component';
+import { EmpresaLstComponent } from './componente/empresa/empresa-lst/empresa-lst.component';
+import { EmpresaViewComponent } from './componente/empresa/empresa-view/empresa-view.component';
+import { EmpresaNewComponent } from './componente/empresa/empresa-new/empresa-new.component';
+import { EmpresaEditComponent } from './componente/empresa/empresa-edit/empresa-edit.component';
+import { FacturaLstComponent } from './componente/factura/factura-lst/factura-lst.component';
+import { FacturaNewComponent } from './componente/factura/factura-new/factura-new.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +40,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ClientelistaComponent,
     MenuComponent,
     ClienteEditComponent,
-    ClienteVerComponent
+    ClienteVerComponent,
+    PersonaLstComponent,
+    PersonaViewComponent,
+    PersonaNewComponent,
+    PersonaEditComponent,
+    EmpresaLstComponent,
+    EmpresaViewComponent,
+    EmpresaNewComponent,
+    EmpresaEditComponent,
+    FacturaLstComponent,
+    FacturaNewComponent
 
   ],
   imports: [
@@ -43,14 +63,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 1500,
       progressBar: true,
       positionClass: 'toast-top-center',
       preventDuplicates: true
     }) // ToastrModule added
 
   ],
-  providers: [CatalogoService, DatePipe],
+  providers: [CatalogoService, DatePipe, { provide: HTTP_INTERCEPTORS, useClass: HttpinterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,6 +9,7 @@ declare var $: any;
   styleUrls: ['./cliente-ver.component.css']
 })
 export class ClienteVerComponent implements OnInit {
+  nombreEntidad = 'cliente';
   respCliente: any = [];
   respRegimen: any = [];
   constructor(private servicio: CatalogoService) { }
@@ -23,21 +24,17 @@ export class ClienteVerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.servicio.ObtenerUno('cliente', sessionStorage["idCliente"]).subscribe(
-      res => {
-        this.respCliente = res;
-        this.servicio.ObtenerUno('regimen', this.respCliente.idRegimen).subscribe(
-          resreg => {
-            this.respRegimen = resreg;
-          },
-          err => console.error(err)
-        );
-      },
-      err => console.error(err)
-    );
+    this.CargarDatos();
   }
+  async CargarDatos() {
+    try {
+      this.respCliente = await this.servicio.ObtenerUno(this.nombreEntidad, sessionStorage["idCliente"]);
+      this.respRegimen = await this.servicio.ObtenerUno('regimen', this.respCliente.idRegimen);
 
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
 

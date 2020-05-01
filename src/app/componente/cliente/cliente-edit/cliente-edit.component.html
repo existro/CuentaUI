@@ -6,16 +6,20 @@
         </div>
     </h4>
     <div class="ui top attached secondary menu">
-        <a class="ui icon item msjflotante" routerLink="/cliente/ver" data-content="Atrás" data-variation="mini">
+        <a class="ui icon item msjflotante" routerLink="/cliente-ver" data-content="Atrás" data-variation="mini">
             <i class="chevron left blue icon"></i>
         </a>
         <div class="right menu">
-            <a class="ui icon item msjflotante" (click)="ModalEliminar();" data-content="Eliminar"
-                data-variation="mini">
+            <a class="ui icon item msjflotante" (click)="ModalActivar()" data-content="Activar" data-variation="mini"
+                [ngClass]="{'reveal': !(respCliente.Estado!='A')}">
+                <i class="sync blue icon"></i>
+            </a>
+            <a class="ui icon item msjflotante" (click)="ModalEliminar();" data-content="Eliminar" data-variation="mini"
+                [ngClass]="{'reveal': respCliente.Estado!='A'}">
                 <i class="trash alternate outline blue icon"></i>
             </a>
-            <a class="ui icon item msjflotante" routerLink="../../cliente/nuevo" data-content="Nuevo"
-                data-variation="mini">
+
+            <a class="ui icon item msjflotante" routerLink="/cliente-nuevo" data-content="Nuevo" data-variation="mini">
                 <i class="plus blue icon"></i>
             </a>
         </div>
@@ -76,8 +80,7 @@
         <div class="ui center aligned grid">
             <div class="center aligned one column row">
                 <div class="column">
-                    <button class="ui tiny green basic button" [disabled]="!FormCliente.valid"
-                        type="submit">Guardar</button>
+                    <button class="ui tiny green basic button" type="submit">Guardar</button>
 
 
                     <!-- <div class="ui small buttons">
@@ -115,6 +118,25 @@
             No
         </button>
         <button class="ui green ok inverted button" (click)="Eliminar()">
+            <i class="checkmark icon"></i>
+            SI
+        </button>
+    </div>
+</div>
+<div id="modalActivar" class="ui basic tiny modal">
+    <div class="ui icon header">
+        <i class="sync icon"></i>
+        Activar Cliente
+    </div>
+    <div class="content">
+        <p>¿Deseas activar el cliente?</p>
+    </div>
+    <div class="actions">
+        <button class="ui red cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </button>
+        <button class="ui green ok inverted button" (click)="Activar()">
             <i class="checkmark icon"></i>
             SI
         </button>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { CatalogoService } from 'src/app/servicio/catalogo.service';
+
 declare var $: any;
 
 @Component({
@@ -7,7 +8,10 @@ declare var $: any;
   templateUrl: './clientelista.component.html',
   styleUrls: ['./clientelista.component.css']
 })
+
 export class ClientelistaComponent implements OnInit {
+  chkEstado = false;
+  nombreEntidad = 'cliente';
   buscarCliente: any;
   respClientes: any = [];
   NoItemsPagina = 15;
@@ -16,12 +20,7 @@ export class ClientelistaComponent implements OnInit {
   constructor(private clienteServicio: CatalogoService) { }
 
   ngOnInit(): void {
-    this.clienteServicio.ObtenerTodos('cliente').subscribe(
-      res => {
-        this.respClientes = res;
-      },
-      err => console.error(err)
-    );
+    this.CargarDatos();
   }
   // tslint:disable-next-line: use-lifecycle-interface
   ngAfterContentInit(): void {
@@ -31,8 +30,20 @@ export class ClientelistaComponent implements OnInit {
         transition: 'fade'
       });
   }
-
   Seleccionado(id: any) {
-    sessionStorage["idCliente"] = id;
+    sessionStorage['idCliente'] = id;
+  }
+
+  async CargarDatos() {
+    this.respClientes = await this.clienteServicio.ObtenerTodos(this.nombreEntidad);
+    if (this.chkEstado) {
+      this.respClientes = await this.respClientes.filter((cliente) => cliente.Estado !== 'A');
+    }
+    else {
+      this.respClientes = await this.respClientes.filter((cliente) => cliente.Estado === 'A');
+    }
+  }
+  VerTodos() {
+    this.CargarDatos();
   }
 }

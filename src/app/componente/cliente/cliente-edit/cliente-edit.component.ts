@@ -14,6 +14,7 @@ declare var $: any;
 })
 export class ClienteEditComponent implements OnInit {
   constructor(private servicio: CatalogoService, public router: Router, private datepipe: DatePipe, private mensaje: ToastrService) { }
+  nombreEntidad = 'cliente';
   respCliente: any = [];
   respRegimen: any = [];
   submit = false;
@@ -32,22 +33,17 @@ export class ClienteEditComponent implements OnInit {
   });
 
   ngAfterContentInit(): void {
-    $('.ui.dropdown')
-      .dropdown();
-    /*  $('.message')
-       // tslint:disable-next-line: space-before-function-paren
-       .on('click', function () {
-         $(this).closest('.message').transition('fade');
-       })
-       ; */
     $('.msjflotante')
       .popup({
         position: 'bottom left',
         transition: 'fade'
       });
+    $('.ui.dropdown')
+      .dropdown();
   }
   ngOnInit(): void {
-    this.servicio.ObtenerUno('cliente', sessionStorage["idCliente"]).subscribe(
+    this.CargarDatos();
+    /* this.servicio.ObtenerUno(this.nombreEntidad, sessionStorage["idCliente"]).subscribe(
       res => {
         this.respCliente = res;
         this.FormCliente.controls.idCliente.setValue(this.respCliente.idCliente);
@@ -69,40 +65,75 @@ export class ClienteEditComponent implements OnInit {
       },
       err => console.error(err)
     );
-
+ */
 
     /*  this.FormCliente.controls.idRegimen.valueChanges.subscribe(idRegimen =>
        this.respCliente.idRegimen = idRegimen);
      this.FormCliente.controls.idRegimen.setValue(this.respRegimen.filter(c => c.idRegimen === this.FormCliente.controls.idRegimen.value));
     */
   }
-  Guardar() {
-    console.log(this.FormCliente.valid);
-    if (this.FormCliente.valid && this.FormCliente.touched) {
-      /* this.respCliente = this.FormCliente.value;
-      this.respCliente.FechaInicio = new Date(this.respCliente.FechaInicio).toISOString(); */
 
-      this.servicio.Editar('cliente', this.FormCliente.value, sessionStorage["idCliente"]).subscribe(
-        res => {
-          console.log(res);
-          if (res["idGuardado"] > 0) {
-            /*  this.guardado = true; */
-            this.submit = false;
-            this.FormCliente.markAsUntouched();
-            this.mensaje.success('El cliente se guardó correctamente', 'Guardado');
-            this.router.onSameUrlNavigation = 'reload';
-            this.router.navigate(['/cliente/ver']);
-            /*  $('#modalGuardado')
-               .modal('show')
-               ; */
-          }
-        },
-        err => console.error(JSON.stringify(err))
-      );
-    } else {
-      this.mensaje.info('No hay cambios para guardar', 'Información');
-      this.submit = true;
+  async CargarDatos() {
+    try {
+      this.respCliente = await this.servicio.ObtenerUno(this.nombreEntidad, sessionStorage["idCliente"]);
+      this.FormCliente.controls.idCliente.setValue(this.respCliente.idCliente);
+      this.FormCliente.controls.Nombre.setValue(this.respCliente.Nombre);
+      this.FormCliente.controls.Propietario.setValue(this.respCliente.Propietario);
+      this.FormCliente.controls.Nit.setValue(this.respCliente.Nit);
+      this.FormCliente.controls.Telefono.setValue(this.respCliente.Telefono);
+      this.FormCliente.controls.idRegimen.setValue(this.respCliente.idRegimen);
+      this.FormCliente.controls.FechaInicio.setValue(this.datepipe.transform(this.respCliente.FechaInicio, 'yyyy-MM-dd'));
+      this.FormCliente.controls.SAT.setValue(this.respCliente.SAT);
+      this.FormCliente.controls.Detalles.setValue(this.respCliente.Detalles);
+      this.respRegimen = await this.servicio.ObtenerTodos('regimen');
+
+    } catch (error) {
+
     }
+  }
+
+
+  async Guardar() {
+    try {
+      if (this.FormCliente.valid && this.FormCliente.touched) {
+        const res = await this.servicio.Editar(this.nombreEntidad, this.FormCliente.value, sessionStorage["idCliente"]);
+        if (res["idGuardado"] > 0) {
+          this.submit = false;
+          this.FormCliente.markAsUntouched();
+          this.mensaje.success('El cliente se guardó correctamente', 'Guardado');
+          //this.router.navigate(['/cliente/ver']);
+
+        }
+      }
+      else {
+        this.mensaje.info('No hay cambios para guardar', 'Información');
+        this.submit = true;
+      }
+    } catch (error) {
+      this.mensaje.error(error, 'Error');
+    }
+    /*     console.log(this.FormCliente.valid);
+        if (this.FormCliente.valid && this.FormCliente.touched) {
+         
+    
+          this.servicio.Editar(this.nombreEntidad, this.FormCliente.value, sessionStorage["idCliente"]).subscribe(
+            res => {
+              console.log(res);
+              if (res["idGuardado"] > 0) {
+               
+                this.submit = false;
+                this.FormCliente.markAsUntouched();
+                this.mensaje.success('El cliente se guardó correctamente', 'Guardado');
+                this.router.navigate(['/cliente/ver']);
+              
+              }
+            },
+            err => console.error(JSON.stringify(err))
+          );
+        } else {
+          this.mensaje.info('No hay cambios para guardar', 'Información');
+          this.submit = true;
+        }*/
   }
 
 
@@ -111,8 +142,55 @@ export class ClienteEditComponent implements OnInit {
       .modal('show')
       ;
   }
-  Eliminar() {
-    console.log('Eliminar desde ver');
+  async Eliminar() {
+    try {
+      const res = await this.servicio.Inhabilitar(this.nombreEntidad, sessionStorage["idCliente"]);
+      this.mensaje.success('El cliente se eliminó correctamente', 'Eliminado');
+      this.router.navigate(['/cliente']);
+    } catch (error) {
+      console.log(error);
+    }
+
+    /*   console.log('Eliminando');
+      this.servicio.Inhabilitar(this.nombreEntidad, sessionStorage["idCliente"]).subscribe(
+        res => {
+          this.respCliente = res;
+          this.mensaje.success('El cliente se eliminó correctamente', 'Eliminado');
+          this.router.navigate(['/cliente']);
+        },
+        err => console.error(err)
+      ); */
+
+
+  }
+
+  ModalActivar() {
+    $('#modalActivar')
+      .modal('show')
+      ;
+  }
+  async Activar() {
+    try {
+      const res = await this.servicio.Habilitar(this.nombreEntidad, sessionStorage["idCliente"]);
+      this.mensaje.success('El cliente se activó correctamente', 'Activado');
+      this.router.navigate(['/cliente']);
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+    /* 
+        console.log('Eliminando');
+        this.servicio.Habilitar(this.nombreEntidad, sessionStorage["idCliente"]).subscribe(
+          res => {
+            this.respCliente = res;
+            this.mensaje.success('El cliente se activó correctamente', 'Activado');
+            this.router.navigate(['/cliente']);
+          },
+          err => console.error(err)
+        );
+     */
 
   }
 
