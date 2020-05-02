@@ -1,68 +1,75 @@
-<h4 class="ui dividing header">
-    <i class="id card outline icon"></i>
-    <div class="content">
-        Facturas
-    </div>
-</h4>
-
-<div class="ui top attached secondary menu">
-
-    <div class="ui  aligned category search item">
-        <div class="ui transparent icon input">
-            <input class="prompt" type="text" placeholder="Buscar..." [(ngModel)]="busqueda">
-            <i class="search link icon"></i>
+<br>
+<div class="ui container">
+    <h4 class="ui dividing header">
+        <i class="id card outline icon"></i>
+        <div class="content">
+            Facturas
         </div>
-        <div class="results"></div>
-    </div>
+    </h4>
 
-    <div class="right menu">
+    <div class="ui top attached secondary menu">
 
-        <div class="ui item toggle checkbox">
-            <input type="checkbox" (click)="CargarDatos()" name="Estado" [(ngModel)]="chkEstado">
-            <label>Inactivos</label>
+        <div class="ui  aligned category search item">
+            <div class="ui transparent icon input">
+                <input class="prompt" type="text" placeholder="Buscar..." [(ngModel)]="busqueda">
+                <i class="search link icon"></i>
+            </div>
+            <div class="results"></div>
         </div>
 
-        <a class="ui  icon item msjflotante" routerLink="/factura-new" data-content="Agregar" data-variation="mini">
-            <i class="plus blue icon"></i>
-        </a>
+        <div class="right menu">
+
+            <div class="ui item toggle checkbox">
+                <input type="checkbox" (click)="CargarDatos()" name="Estado" [(ngModel)]="chkEstado">
+                <label>Inactivos</label>
+            </div>
+
+            <a class="ui  icon item msjflotante" routerLink="/factura-new" data-content="Agregar" data-variation="mini">
+                <i class="plus blue icon"></i>
+            </a>
+
+        </div>
+
 
     </div>
+    <div class="ui bottom attached basic segment">
+
+        <table class="ui grey small very basic table">
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Serie</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Nit</th>
+                    <th>Nombre</th>
+                    <th class="right aligned">Total</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let factura of facturas | filter:[{field:'Nombre', value: busqueda},{field:'SAT', value: busqueda},{field:'FechaInicio', value: busqueda}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }"
+                    [ngClass]="{'negative': factura.Estado!='A'}">
+                    <td><a routerLink="#" (click)="Seleccionar(factura.idFactura)">{{factura.NumeroDoc}}</a></td>
+                    <td>{{factura.Serie}}</td>
+                    <td>{{factura.Fecha|date:"dd/MM/yyy"}}</td>
+                    <td>{{factura.TipoFactura}}</td>
+                    <td>{{factura.NitClienteFactura}}</td>
+                    <td>{{factura.NombreClienteFactura}}</td>
+                    <td class="right aligned">Q. {{factura.Total}}</td>
 
 
-</div>
-<div class="ui bottom attached basic segment">
-
-    <table class="ui grey small very basic table">
-        <thead>
-            <tr>
-                <th>Numero</th>
-                <th>Serie</th>
-                <th>Fecha</th>
-                <th>Nit</th>
-                <th>Nombre</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let factura of facturas | filter:[{field:'Nombre', value: busqueda},{field:'SAT', value: busqueda},{field:'FechaInicio', value: busqueda}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }"
-                [ngClass]="{'negative': factura.Estado!='A'}">
-                <td><a routerLink="#" (click)="Seleccionar(factura.idFactura)">{{factura.NumeroDoc}}</a></td>
-                <td>{{factura.Serie}}</td>
-                <td>{{factura.Fecha|date:"dd/MM/yyy"}}</td>
-                <td>{{factura.NitClienteFactura}}</td>
-                <td>{{factura.NombreClienteFactura}}</td>
-                <td>{{factura.Total}}</td>
-                
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="6">
-                    <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
-                        nextLabel="Siguiente" maxSize="9" class="ui right floated">
-                    </pagination-controls>
-                </th>
-            </tr>
-        </tfoot>
-    </table>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
+                            nextLabel="Siguiente" maxSize="9" class="ui right floated">
+                        </pagination-controls>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>

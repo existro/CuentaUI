@@ -1,30 +1,38 @@
 <br>
 <div class="ui container">
-    <form [formGroup]="FormFactura" (ngSubmit)="Guardar()" class="ui mini form">
+    <form [formGroup]="FormFactura" (ngSubmit)="Guardar()" class="ui small form">
         <h4 class="ui dividing header">
             <i class="id badge outline icon"></i>
             <div class="content">
-                Nueva - Factura
+                Factura - {{factura.NumeroDoc}}
             </div>
         </h4>
         <div class="ui top attached secondary menu">
-            <a class="ui icon item msjflotante" routerLink="/factura" data-content="Atrás" data-variation="mini">
+            <a class="ui icon item msjflotante" routerLink="#" (click)="Seleccionar(id)" data-content="Atrás"
+                data-variation="mini">
                 <i class="chevron left blue icon"></i>
             </a>
+            <div class="right menu">
+                <a class="ui icon item msjflotante" (click)="ModalActivar()" data-content="Activar"
+                    data-variation="mini" [ngClass]="{'reveal': !(factura.Estado!='A')}">
+                    <i class="sync blue icon"></i>
+                </a>
+                <a class="ui icon item msjflotante" (click)="ModalEliminar();" data-content="Eliminar"
+                    data-variation="mini" [ngClass]="{'reveal': factura.Estado!='A'}">
+                    <i class="trash alternate outline blue icon"></i>
+                </a>
 
+                <a class="ui icon item msjflotante" routerLink="/factura-new" data-content="Nuevo"
+                    data-variation="mini">
+                    <i class="plus blue icon"></i>
+                </a>
+            </div>
         </div>
         <div class="ui bottom attached basic segment">
-
             <div class="fields">
 
-                <div class="nine wide field" [ngClass]="{'error': FCont.idEmpresa.invalid && submit}"
-                    (change)="selectempresa($event.target.value)">
-                    <label>Empresa</label>
-                    <select class=" ui search dropdown" name="idEmpresa" formControlName="idEmpresa">
-                        <option value="0">Seleccione...</option>
-                        <option *ngFor="let empresa of empresas" value="{{empresa.idEmpresa}}">{{empresa.Nombre}}
-                        </option>
-                    </select>
+                <div class="nine wide field">
+                    <h4><label>{{factura.empresa_Nombre}}</label></h4>
                 </div>
 
                 <div class="inline fields" [ngClass]="{'error': FCont.TipoFactura.invalid && submit}">
@@ -91,50 +99,49 @@
             <div class="ui center aligned grid">
                 <div class="center aligned one column row">
                     <div class="column">
-                        <button class="ui green basic button" type="submit">Guardar</button>
+                        <button class="ui tiny green basic button" type="submit">Guardar</button>
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="ui bottom attached basic segment">
-                <table class="ui grey small very basic table">
-                    <thead>
-                        <tr>
-                            <th>Numero</th>
-                            <th>Serie</th>
-                            <th>Fecha</th>
-                            <th>Tipo</th>
-                            <th>Nit</th>
-                            <th>Nombre</th>
-                            <th class="right aligned">Total</th>
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let factura of facturas" [ngClass]="{'negative': factura.Estado!='A'}">
-                            <td>{{factura.NumeroDoc}}</td>
-                            <td>{{factura.Serie}}</td>
-                            <td>{{factura.Fecha|date:"dd/MM/yyy"}}</td>
-                            <td>{{factura.TipoFactura}}</td>
-                            <td>{{factura.NitClienteFactura}}</td>
-                            <td>{{factura.NombreClienteFactura}}</td>
-                            <td class="right aligned">Q. {{factura.Total}}</td>
-
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <!-- 
-                    <th colspan="6">
-                        <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
-                            nextLabel="Siguiente" maxSize="9" class="ui right floated">
-                        </pagination-controls> 
-                    </th>-->
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
         </div>
     </form>
+    <div id="modalEliminarVer" class="ui basic tiny modal">
+        <div class="ui icon header">
+            <i class="trash icon"></i>
+            Eliminar factura
+        </div>
+        <div class="content">
+            <p>¿Deseas eliminar la factura?</p>
+        </div>
+        <div class="actions">
+            <button class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </button>
+            <button class="ui green ok inverted button" (click)="Eliminar()">
+                <i class="checkmark icon"></i>
+                SI
+            </button>
+        </div>
+    </div>
+    <div id="modalActivar" class="ui basic tiny modal">
+        <div class="ui icon header">
+            <i class="sync icon"></i>
+            Activar factura
+        </div>
+        <div class="content">
+            <p>¿Deseas activar la factura?</p>
+        </div>
+        <div class="actions">
+            <button class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </button>
+            <button class="ui green ok inverted button" (click)="Activar()">
+                <i class="checkmark icon"></i>
+                SI
+            </button>
+        </div>
+    </div>
+
 </div>

@@ -1,64 +1,68 @@
-<h4 class="ui dividing header">
-    <i class="id card outline icon"></i>
-    <div class="content">
-        Personas
-    </div>
-</h4>
+<br>
+<div class="ui container">
 
-<div class="ui top attached secondary menu">
-
-    <div class="ui  aligned category search item">
-        <div class="ui transparent icon input">
-            <input class="prompt" type="text" placeholder="Buscar..." [(ngModel)]="busqueda">
-            <i class="search link icon"></i>
+    <h4 class="ui dividing header">
+        <i class="id card outline icon"></i>
+        <div class="content">
+            Personas
         </div>
-        <div class="results"></div>
-    </div>
-    <div class="right menu">
+    </h4>
 
-        <div class="ui item toggle checkbox">
-            <input type="checkbox" (click)="VerTodos()" name="Estado" [(ngModel)]="chkEstado">
-            <label>Inactivos</label>
+    <div class="ui top attached secondary menu">
+
+        <div class="ui  aligned category search item">
+            <div class="ui transparent icon input">
+                <input class="prompt" type="text" placeholder="Buscar..." [(ngModel)]="busqueda">
+                <i class="search link icon"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+        <div class="right menu">
+
+            <div class="ui item toggle checkbox">
+                <input type="checkbox" (click)="VerTodos()" name="Estado" [(ngModel)]="chkEstado">
+                <label>Inactivos</label>
+            </div>
+
+            <a class="ui  icon item msjflotante" routerLink="/persona-new" data-content="Agregar" data-variation="mini">
+                <i class="plus blue icon"></i>
+            </a>
+
         </div>
 
-        <a class="ui  icon item msjflotante" routerLink="/persona-new" data-content="Agregar" data-variation="mini">
-            <i class="plus blue icon"></i>
-        </a>
 
     </div>
+    <div class="ui bottom attached basic segment">
 
-
-</div>
-<div class="ui bottom attached basic segment">
-
-    <table class="ui grey small very basic table">
-        <thead>
-            <tr>
-                <th>Nit</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Teléfono</th>
-                <th>Correo electrónico</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let persona of personas | filter:[{field:'Nombres', value: busqueda},{field:'Nit', value: busqueda}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }"
-                [ngClass]="{'negative': persona.Estado!='A'}">
-                <td><a routerLink="#" (click)="Seleccionar(persona.idPersona)">{{persona.Nit}}</a></td>
-                <td>{{persona.Nombres}}</td>
-                <td>{{persona.Apellidos}}</td>
-                <td>{{persona.Telefono}}</td>
-                <td>{{persona.CorreoE}}</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="5">
-                    <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
-                        nextLabel="Siguiente" maxSize="9" class="ui right floated">
-                    </pagination-controls>
-                </th>
-            </tr>
-        </tfoot>
-    </table>
+        <table class="ui grey small very basic table">
+            <thead>
+                <tr>
+                    <th>Nit</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Correo electrónico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let persona of personas | filter:[{field:'Nombres', value: busqueda},{field:'Nit', value: busqueda}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }"
+                    [ngClass]="{'negative': persona.Estado!='A'}">
+                    <td><a routerLink="#" (click)="Seleccionar(persona.idPersona)">{{persona.Nit}}</a></td>
+                    <td>{{persona.Nombres}}</td>
+                    <td>{{persona.Apellidos}}</td>
+                    <td>{{persona.Telefono}}</td>
+                    <td>{{persona.CorreoE}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="5">
+                        <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
+                            nextLabel="Siguiente" maxSize="9" class="ui right floated">
+                        </pagination-controls>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>

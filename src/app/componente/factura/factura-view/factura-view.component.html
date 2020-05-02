@@ -1,0 +1,68 @@
+<br>
+<div class="ui container">
+    <h4 class="ui dividing header">
+        <i class="id badge outline icon"></i>
+        <div class="content">
+            Factura - {{factura.NumeroDoc}}
+        </div>
+    </h4>
+    <div class="ui top attached secondary menu">
+        <a class="ui icon item msjflotante" routerLink="/factura" data-content="Atrás" data-variation="mini">
+            <i class="chevron left blue icon"></i>
+        </a>
+        <div class="right menu">
+
+            <a class="ui icon item msjflotante" routerLink="#" (click)="Editar(id)" data-content="Editar"
+                data-variation="mini">
+                <i class="edit outline blue icon"></i>
+            </a>
+            <a class="ui icon item msjflotante" routerLink="/factura-new" data-content="Nuevo" data-variation="mini">
+                <i class="plus blue icon"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ui bottom attached basic segment">
+        <table class="ui table">
+
+            <tbody>
+                <tr>
+                    <td class="three wide column active">Empresa</td>
+                    <td class="four wide column">{{factura.empresa_Nombre}}</td>
+                    <td class="three wide column active">Número</td>
+                    <td class="four wide column">{{factura.NumeroDoc}}</td>
+                </tr>
+
+                <tr>
+                    <td class=" active">Serie</td>
+                    <td>{{factura.Serie}}</td>
+                    <td class=" active">Fecha</td>
+                    <td>{{factura.Fecha| date : "dd/MM/yyyy"}}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Cuenta</td>
+                    <td>{{factura.cuenta_Descripcion}}</td>
+                    <td class="active">Tipo</td>
+                    <td>{{factura.TipoFactura}}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Nit</td>
+                    <td>{{factura.NitClienteFactura}}</td>
+                    <td class="active">Cliente</td>
+                    <td>{{factura.NombreClienteFactura}}</td>
+                </tr>
+
+                <tr>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class="active">Total</td>
+                    <td class="positive">{{factura.Total}}</td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

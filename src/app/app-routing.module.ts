@@ -15,6 +15,8 @@ import { EmpresaNewComponent } from './componente/empresa/empresa-new/empresa-ne
 import { EmpresaEditComponent } from './componente/empresa/empresa-edit/empresa-edit.component';
 import { FacturaLstComponent } from './componente/factura/factura-lst/factura-lst.component';
 import { FacturaNewComponent } from './componente/factura/factura-new/factura-new.component';
+import { FacturaViewComponent } from './componente/factura/factura-view/factura-view.component';
+import { FacturaEditComponent } from './componente/factura/factura-edit/factura-edit.component';
 
 
 const routes: Routes = [
@@ -33,7 +35,9 @@ const routes: Routes = [
   { path: 'empresa-new/:idPersona', component: EmpresaNewComponent },
   { path: 'empresa-edit/:id', component: EmpresaEditComponent },
   { path: 'factura', component: FacturaLstComponent },
-  { path: 'factura-new', component: FacturaNewComponent},
+  { path: 'factura-new', component: FacturaNewComponent },
+  { path: 'factura/:id', component: FacturaViewComponent },
+  { path: 'factura-edit/:id', component: FacturaEditComponent },
 
   { path: '', component: InicioComponent },
   { path: '**', component: InicioComponent }

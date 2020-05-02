@@ -17,7 +17,9 @@ export class MenuComponent implements OnInit {
 
 
   Abrirmenulateral() {
-    $('.menu.sidebar').sidebar('toggle');
+    $('.menu.sidebar')
+      .sidebar('setting', 'transition', 'overlay')
+      .sidebar('toggle');
   }
 
 

@@ -30,6 +30,10 @@ import { EmpresaNewComponent } from './componente/empresa/empresa-new/empresa-ne
 import { EmpresaEditComponent } from './componente/empresa/empresa-edit/empresa-edit.component';
 import { FacturaLstComponent } from './componente/factura/factura-lst/factura-lst.component';
 import { FacturaNewComponent } from './componente/factura/factura-new/factura-new.component';
+import { FacturaViewComponent } from './componente/factura/factura-view/factura-view.component';
+import { FacturaEditComponent } from './componente/factura/factura-edit/factura-edit.component';
+import { UsuarioLstComponent } from './componente/usuario/usuario-lst/usuario-lst.component';
+import { UsuarioNewComponent } from './componente/usuario/usuario-new/usuario-new.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { FacturaNewComponent } from './componente/factura/factura-new/factura-ne
     EmpresaNewComponent,
     EmpresaEditComponent,
     FacturaLstComponent,
-    FacturaNewComponent
+    FacturaNewComponent,
+    FacturaViewComponent,
+    FacturaEditComponent,
+    UsuarioLstComponent,
+    UsuarioNewComponent
 
   ],
   imports: [

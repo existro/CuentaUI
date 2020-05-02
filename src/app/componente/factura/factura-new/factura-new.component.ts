@@ -22,7 +22,7 @@ export class FacturaNewComponent implements OnInit {
     NitClienteFactura: new FormControl(''),
     NombreClienteFactura: new FormControl('', [Validators.required]),
     Total: new FormControl(''),
-    TipoFactura: new FormControl('')
+    TipoFactura: new FormControl('',[Validators.required])
   });
 
   id: any;
@@ -58,7 +58,6 @@ export class FacturaNewComponent implements OnInit {
   async Guardar() {
     try {
       if (this.FormFactura.valid && this.FormFactura.touched) {
-        console.log(this.FormFactura.value);
         const res = await this.catalogos.Guardar(this.nombreEntidad, this.FormFactura.value);
         this.id = res["idGuardado"];
         if (res["idGuardado"] > 0) {

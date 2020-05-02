@@ -1,51 +1,54 @@
-<h4 class="ui dividing header">
-    <i class="id badge outline icon"></i>
-    <div class="content">
-        {{empresa.Nombre}}
-    </div>
-</h4>
-<div class="ui top attached secondary menu">
-    <a class="ui icon item msjflotante" routerLink="/empresa" data-content="Atrás" data-variation="mini">
-        <i class="chevron left blue icon"></i>
-    </a>
-    <div class="right menu">
-
-        <a class="ui icon item msjflotante" routerLink="#" (click)="Editar(id)" data-content="Editar"
-            data-variation="mini">
-            <i class="edit outline blue icon"></i>
+<br>
+<div class="ui container">
+    <h4 class="ui dividing header">
+        <i class="id badge outline icon"></i>
+        <div class="content">
+            Empresa - {{empresa.Nombre}}
+        </div>
+    </h4>
+    <div class="ui top attached secondary menu">
+        <a class="ui icon item msjflotante" routerLink="/empresa" data-content="Atrás" data-variation="mini">
+            <i class="chevron left blue icon"></i>
         </a>
-        <a class="ui icon item msjflotante" routerLink="/empresa-new" data-content="Nuevo" data-variation="mini">
-            <i class="plus blue icon"></i>
-        </a>
+        <div class="right menu">
+
+            <a class="ui icon item msjflotante" routerLink="#" (click)="Editar(id)" data-content="Editar"
+                data-variation="mini">
+                <i class="edit outline blue icon"></i>
+            </a>
+            <a class="ui icon item msjflotante" routerLink="/empresa-new" data-content="Nuevo" data-variation="mini">
+                <i class="plus blue icon"></i>
+            </a>
+        </div>
     </div>
-</div>
-<div class="ui bottom attached basic segment">
-    <table class="ui table">
+    <div class="ui bottom attached basic segment">
+        <table class="ui table">
 
-        <tbody>
-            <tr>
-                <td class="three wide column active">Nombre</td>
-                <td class="four wide column">{{empresa.Nombre}}</td>
-                <td class="three wide column active">Propietario</td>
-                <td class="four wide column">{{empresa.persona_Nombres}} {{empresa.persona_Apellidos}}</td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td class="three wide column active">Nombre</td>
+                    <td class="four wide column">{{empresa.Nombre}}</td>
+                    <td class="three wide column active">Propietario</td>
+                    <td class="four wide column">{{empresa.persona_Nombres}} {{empresa.persona_Apellidos}}</td>
+                </tr>
 
-            <tr>
-                <td class=" active">Régimen</td>
-                <td>{{empresa.regimen_Nombre}}</td>
-                <td class=" active">Fecha de inicio</td>
-                <td>{{empresa.FechaInicio| date : "dd/MM/yyyy"}}</td>
-            </tr>
+                <tr>
+                    <td class=" active">Régimen</td>
+                    <td>{{empresa.regimen_Nombre}}</td>
+                    <td class=" active">Fecha de inicio</td>
+                    <td>{{empresa.FechaInicio| date : "dd/MM/yyyy"}}</td>
+                </tr>
 
-            <tr>
-                <td class="active">SAT</td>
-                <td>{{empresa.SAT}}</td>
-                <td class="active">Detalles</td>
-                <td>{{empresa.Detalles}}</td>
-            </tr>
+                <tr>
+                    <td class="active">SAT</td>
+                    <td>{{empresa.SAT}}</td>
+                    <td class="active">Detalles</td>
+                    <td>{{empresa.Detalles}}</td>
+                </tr>
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
 
+    </div>
 </div>
