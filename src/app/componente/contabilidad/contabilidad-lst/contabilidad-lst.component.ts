@@ -4,15 +4,15 @@ import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
-  selector: 'app-persona-lst',
-  templateUrl: './persona-lst.component.html',
-  styleUrls: ['./persona-lst.component.css']
+  selector: 'app-contabilidad-lst',
+  templateUrl: './contabilidad-lst.component.html',
+  styleUrls: ['./contabilidad-lst.component.css']
 })
-export class PersonaLstComponent implements OnInit {
+export class ContabilidadLstComponent implements OnInit {
   chkEstado = false;
-  nombreEntidad = 'persona';
+  nombreEntidad = 'contabilidad';
   busqueda: any;
-  personas: any = [];
+  contabilidad: any = [];
   NoItemsPagina = 15;
   PaginaActual = 1;
 
@@ -32,20 +32,16 @@ export class PersonaLstComponent implements OnInit {
   }
   Seleccionar(id: any) {
     //  sessionStorage['idPersona'] = id;
-    this.router.navigate(['/persona', id]);
+    this.router.navigate(['/factura', id]);
   }
   async CargarDatos() {
-    this.personas = await this.catalogos.ObtenerTodos(this.nombreEntidad);
-    console.log(this.personas);
+    this.contabilidad = await this.catalogos.ObtenerTodos(this.nombreEntidad);
     if (this.chkEstado) {
-      this.personas = await this.personas.filter((persona) => persona.Estado !== 'A');
+      this.contabilidad = await this.contabilidad.filter((conta) => conta.Estado !== 'A');
     }
     else {
-      this.personas = await this.personas.filter((persona) => persona.Estado === 'A');
+      this.contabilidad = await this.contabilidad.filter((conta) => conta.Estado === 'A');
     }
 
-  }
-  VerTodos() {
-    this.CargarDatos();
   }
 }

@@ -1,8 +1,8 @@
 {
-    "/cuentapi/*": {
-        "target": "http://www.existro.shekalug.org",
-        "secure": true,
-        "changeOrigin": true,
-        "logLevel": "debug"
-    }
+  "/cuentapi/*": {
+    "target": "http://localhost:8080",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
 }

@@ -1,10 +1,9 @@
 <br>
 <div class="ui container">
-
     <h4 class="ui dividing header">
         <i class="id card outline icon"></i>
         <div class="content">
-            Personas
+            Contabilidad
         </div>
     </h4>
 
@@ -17,17 +16,17 @@
             </div>
             <div class="results"></div>
         </div>
+
         <div class="right menu">
 
             <div class="ui item toggle checkbox">
-                <input type="checkbox" (click)="VerTodos()" name="Estado" [(ngModel)]="chkEstado">
-                <label>Inactivos</label>
+                <input type="checkbox" (click)="CargarDatos()" name="Estado" [(ngModel)]="chkEstado">
+                <label>Todo</label>
             </div>
 
-            <a class="ui  icon item msjflotante" routerLink="/persona-new" data-content="Agregar" data-variation="mini">
+            <a class="ui  icon item msjflotante" routerLink="/factura-new" data-content="Agregar" data-variation="mini">
                 <i class="plus blue icon"></i>
             </a>
-
         </div>
 
 
@@ -37,26 +36,25 @@
         <table class="ui sortable grey small basic table">
             <thead>
                 <tr>
-                    <th>Nit</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Teléfono</th>
-                    <th>Correo electrónico</th>
+                    <th>Empresa</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha Final</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let persona of personas | filter:[{field:'Nombres', value: busqueda},{field:'Nit', value: busqueda}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }"
-                    [ngClass]="{'negative': persona.Estado!='A'}">
-                    <td><a routerLink="#" (click)="Seleccionar(persona.idPersona)">{{persona.Nit}}</a></td>
-                    <td>{{persona.Nombres}}</td>
-                    <td>{{persona.Apellidos}}</td>
-                    <td>{{persona.Telefono}}</td>
-                    <td>{{persona.CorreoE}}</td>
+                <tr *ngFor="let conta of contabilidad | filter:[{field:'Nombre', value: busqueda},{field:'SAT', value: busqueda},{field:'FechaInicio', value: busqueda}] | paginate: { itemsPerPage: NoItemsPagina, currentPage: PaginaActual }"
+                    [ngClass]="{'negative': conta.Estado!='A'}">
+                    <td><a routerLink="#" (click)="Seleccionar(conta.idContabilidad)">{{conta.empresa_Nombre}}</a></td>
+                    <td>{{conta.FechaInicio|date:"dd/MM/yyy"}}</td>
+                    <td>{{conta.FechaFin|date:"dd/MM/yyy"}}</td>
+
+
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="5">
+                    <th colspan="4">
                         <pagination-controls (pageChange)="PaginaActual = $event" previousLabel="Anterior"
                             nextLabel="Siguiente" maxSize="9" class="ui right floated">
                         </pagination-controls>

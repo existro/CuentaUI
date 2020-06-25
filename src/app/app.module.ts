@@ -34,6 +34,8 @@ import { FacturaViewComponent } from './componente/factura/factura-view/factura-
 import { FacturaEditComponent } from './componente/factura/factura-edit/factura-edit.component';
 import { UsuarioLstComponent } from './componente/usuario/usuario-lst/usuario-lst.component';
 import { UsuarioNewComponent } from './componente/usuario/usuario-new/usuario-new.component';
+import { ContabilidadLstComponent } from './componente/contabilidad/contabilidad-lst/contabilidad-lst.component';
+import { ContabilidadNewComponent } from './componente/contabilidad/contabilidad-new/contabilidad-new.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { UsuarioNewComponent } from './componente/usuario/usuario-new/usuario-ne
     FacturaViewComponent,
     FacturaEditComponent,
     UsuarioLstComponent,
-    UsuarioNewComponent
+    UsuarioNewComponent,
+    ContabilidadLstComponent,
+    ContabilidadNewComponent
 
   ],
   imports: [

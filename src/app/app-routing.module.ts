@@ -17,6 +17,7 @@ import { FacturaLstComponent } from './componente/factura/factura-lst/factura-ls
 import { FacturaNewComponent } from './componente/factura/factura-new/factura-new.component';
 import { FacturaViewComponent } from './componente/factura/factura-view/factura-view.component';
 import { FacturaEditComponent } from './componente/factura/factura-edit/factura-edit.component';
+import { ContabilidadLstComponent } from './componente/contabilidad/contabilidad-lst/contabilidad-lst.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'factura-new', component: FacturaNewComponent },
   { path: 'factura/:id', component: FacturaViewComponent },
   { path: 'factura-edit/:id', component: FacturaEditComponent },
+  { path: 'contabilidad', component: ContabilidadLstComponent },
 
   { path: '', component: InicioComponent },
   { path: '**', component: InicioComponent }

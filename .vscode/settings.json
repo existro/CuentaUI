@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 60,
+            "database": "dbcuentas",
+            "dialect": "MySQL",
+            "isActive": false,
+            "isConnected": false,
+            "name": "Local",
+            "password": "Maniac00",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
