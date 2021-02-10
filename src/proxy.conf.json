@@ -1,6 +1,6 @@
 {
   "/cuentapi/*": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"
